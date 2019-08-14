@@ -20,3 +20,13 @@ functions:
       - http:
           method: get
           path: listing
+  getQuotes:
+    handler: handler.getQuotes
+    events:
+      - http:
+          method: get
+          path: quotes/{symbol}
+          request:
+            parameters:
+              paths:
+                id: true
