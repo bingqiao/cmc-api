@@ -10,7 +10,7 @@ Find and replace the value of `X-CMC_PRO_API_KEY` in handler.ts with the API key
 
 ## Frontend app
 
-Please visit github project [cmc-dashboard](https://www.github.com/bingqiao/cmc-dashboard) which serves data for this Angular frontend.
+Please visit github project [cmc-dashboard](https://www.github.com/bingqiao/cmc-dashboard) which manages data from this service.
 
 ## endpoints
 
