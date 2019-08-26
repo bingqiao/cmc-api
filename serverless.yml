@@ -25,8 +25,17 @@ functions:
     events:
       - http:
           method: get
+          path: quotes/{symbol}/{unit}
+          request:
+            parameters:
+              paths:
+                symbol: true
+                unit: true
+      - http:
+          method: get
           path: quotes/{symbol}
           request:
             parameters:
               paths:
-                id: true
+                symbol: true
+

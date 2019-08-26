@@ -1,11 +1,12 @@
 import 'source-map-support/register';
+const config = require('./config.json');
 
 const https = require('https');
 
 const defaultOptions = {
-  hostname: 'sandbox-api.coinmarketcap.com',
+  hostname: config.hostname,
   headers: {
-    'X-CMC_PRO_API_KEY': 'PLACEHOLDER'
+    'X-CMC_PRO_API_KEY': config.apiKey
   }
 };
 
@@ -38,7 +39,11 @@ export const getListing = async (_event, _context) => {
 
 export const getQuotes = async (_event, _context) => {
   let symbol = _event.pathParameters.symbol;
-  const options = Object.assign(defaultOptions, {path: `/v1/cryptocurrency/quotes/latest?symbol=${symbol}&convert=USD`});
+  let unit = _event.pathParameters.unit || 'USD';
+  if (!symbol) {
+    throw new Error('Invalid symbol');
+  }
+  const options = Object.assign(defaultOptions, {path: `/v1/cryptocurrency/quotes/latest?symbol=${symbol}&convert=${unit}`});
   return new Promise((resolve, reject) => {
     https.get(options, function (res) {
       console.log("Got response: " + res.statusCode);
