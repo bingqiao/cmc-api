@@ -7,6 +7,7 @@ service:
 plugins:
   - serverless-webpack
   - serverless-offline
+  - serverless-mocha-plugin
 
 provider:
   name: aws
@@ -19,13 +20,19 @@ functions:
     events:
       - http:
           method: get
-          path: listing
+          path: listing/{unit}
+          cors: true
+          request:
+            parameters:
+              paths:
+                unit: true
   getQuotes:
     handler: handler.getQuotes
     events:
       - http:
           method: get
-          path: quotes/{symbol}/{unit}
+          path: quotes/{symbol}/unit/{unit}
+          cors: true
           request:
             parameters:
               paths:
@@ -34,6 +41,7 @@ functions:
       - http:
           method: get
           path: quotes/{symbol}
+          cors: true
           request:
             parameters:
               paths:

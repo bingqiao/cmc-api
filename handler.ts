@@ -10,9 +10,9 @@ const defaultOptions = {
   }
 };
 
-
 export const getListing = async (_event, _context) => {
-  const options = Object.assign(defaultOptions, {path: '/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=USD'});
+  const unit = _event.pathParameters.unit;
+  const options = Object.assign(defaultOptions, {path: `/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=${unit}`});
   return new Promise((resolve, reject) => {
     https.get(options, function (res) {
       console.log("Got response: " + res.statusCode);
